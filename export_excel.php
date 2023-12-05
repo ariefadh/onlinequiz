@@ -14,7 +14,7 @@ if (isset($_GET['q']) && isset($_GET['title']) && isset($_GET['email'])) {
     $sheet = $spreadsheet->getActiveSheet();
 
     // Marge dan center judul
-    $sheet->mergeCells('A1:G1');
+    $sheet->mergeCells('A1:H1');
     $sheet->setCellValue('A1', 'Rekap Hasil Quiz');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
 
