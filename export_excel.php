@@ -15,7 +15,7 @@ if (isset($_GET['q']) && isset($_GET['title']) && isset($_GET['email'])) {
 
     // Marge dan center judul
     $sheet->mergeCells('A1:H1');
-    $sheet->setCellValue('A1', 'Rekap Hasil Quiz');
+    $sheet->setCellValue('A1', 'Report Hasil Quiz');
     $sheet->getStyle('A1')->getAlignment()->setHorizontal('center');
 
     // Judul Kolom
@@ -27,6 +27,12 @@ if (isset($_GET['q']) && isset($_GET['title']) && isset($_GET['email'])) {
     $sheet->setCellValue('F2', 'Jawaban Benar');
     $sheet->setCellValue('G2', 'Jawaban Salah');
     $sheet->setCellValue('H2', 'Skor');
+
+    // Mengatur lebar kolom otomatis
+    foreach (range('A', 'H') as $column) {
+        $sheet->getColumnDimension($column)->setAutoSize(true);
+    }
+
 
     // Dapatkan data riwayat
     $result = mysqli_query($con, "SELECT * FROM history WHERE eid='$eid' AND email='$email'") or die(mysqli_error($con));
@@ -67,7 +73,7 @@ if (isset($_GET['q']) && isset($_GET['title']) && isset($_GET['email'])) {
     $user = mysqli_query($con, "SELECT name, email FROM user WHERE email='$email'") or die(mysqli_error($con));
     $user_data = mysqli_fetch_array($user);
     $name = $user_data['name'];
-    
+
     $filename = 'Report Hasil Quiz ' . $title . ' - ' . $name . '.xlsx';
 
     $writer = new Xlsx($spreadsheet);
@@ -82,4 +88,3 @@ if (isset($_GET['q']) && isset($_GET['title']) && isset($_GET['email'])) {
     unlink($filename); // Hapus file setelah diunduh
     exit;
 }
-?>

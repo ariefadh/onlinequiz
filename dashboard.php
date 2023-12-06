@@ -71,7 +71,7 @@
                     $q=mysqli_query($con,"SELECT * FROM rank  ORDER BY score DESC " )or die('Error223');
                     echo  '<div class="panel title"><div class="table-responsive">
                     <table class="table table-striped title1" >
-                    <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Nama</b></center></td><td><center><b>Skor</b></center></td></tr>';
+                    <tr style="color:red"><td><center><b>Rank</b></center></td><td><center><b>Email</b></center></td><td><center><b>Skor</b></center></td></tr>';
                     $c=0;
                     while($row=mysqli_fetch_array($q) )
                     {
